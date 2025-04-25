@@ -9,8 +9,8 @@ RUN apt-get update && \
     apt-get clean
 
 WORKDIR /github/workspace
-COPY main.py ./
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+COPY main.py /github/workspace/main.py
+COPY requirements.txt /github/workspace/requirements.txt
+RUN pip install -r /github/workspace/requirements.txt
 
 ENTRYPOINT ["python", "/github/workspace/main.py"]
