@@ -48,7 +48,7 @@ jobs:
         run: python3 main.py
 
       - name: Validate Deployment
-        run: kubectl get deploy dummy -n default
+        run: kubectl get deploy -n default
 
       - name: Cleanup
         run: |
