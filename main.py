@@ -58,7 +58,7 @@ def main():
     # Boolean flags
     for bflag in [
         "ATOMIC", "WAIT", "INSTALL", "REUSE_VALUES", "RESET_VALUES",
-        "DRY_RUN", "CLEANUP_ON_FAIL", "DEPENDENCY_UPDATE"
+        "DRY_RUN", "CLEANUP_ON_FAIL", "DEPENDENCY_UPDATE", "CREATE_NAMESPACE"
     ]:
         args += flag_if_true(f"INPUT_{bflag}", bflag.replace("_", "-").lower())
 

@@ -55,28 +55,29 @@ A GitHub Action to deploy Helm charts using Python. It wraps `helm upgrade --ins
 
 ## 📥 Inputs
 
-| Name                | Description                                 | Default    | Required |
-|---------------------|---------------------------------------------|------------|----------|
-| release             | Helm release name                           | —          | ✅        |
-| chart               | Chart path or reference                     | —          | ✅        |
-| kubeconfig          | Base64-encoded kubeconfig                   | —          | ✅        |
-| namespace           | Kubernetes namespace                        | `default`  | ❌        |
-| version             | Chart version constraint                    | —          | ❌        |
-| values              | Inline YAML values (multiline)              | —          | ❌        |
-| set                 | `--set` values                              | —          | ❌        |
-| set_string          | `--set-string` values                       | —          | ❌        |
-| set_file            | `--set-file` paths                          | —          | ❌        |
-| timeout             | Operation timeout                           | `5m0s`     | ❌        |
-| atomic              | Rollback on failure                         | `false`    | ❌        |
-| wait                | Wait until resources are ready              | `false`    | ❌        |
-| dry_run             | Simulate install                            | `false`    | ❌        |
-| install             | Enable install if not already present       | `true`     | ❌        |
-| reuse_values        | Merge with previous values                  | `false`    | ❌        |
-| reset_values        | Reset to chart defaults                     | `false`    | ❌        |
-| cleanup_on_fail     | Delete resources on failure                 | `false`    | ❌        |
-| dependency_update   | Update missing chart deps                   | `true`     | ❌        |
-| post_renderer       | Path to post-renderer binary                | —          | ❌        |
-| post_renderer_args  | Extra arguments for post-renderer           | —          | ❌        |
+| Name               | Description                                  | Default   | Required |
+|--------------------|----------------------------------------------|-----------|----------|
+| release            | Helm release name                            | —         | ✅        |
+| chart              | Chart path or reference                      | —         | ✅        |
+| kubeconfig         | Base64-encoded kubeconfig                    | —         | ✅        |
+| namespace          | Kubernetes namespace                         | `default` | ❌        |
+| create_namespace   | Create Kubernetes namespace if not available | `false`   | ❌        |
+| version            | Chart version constraint                     | —         | ❌        |
+| values             | Inline YAML values (multiline)               | —         | ❌        |
+| set                | `--set` values                               | —         | ❌        |
+| set_string         | `--set-string` values                        | —         | ❌        |
+| set_file           | `--set-file` paths                           | —         | ❌        |
+| timeout            | Operation timeout                            | `5m0s`    | ❌        |
+| atomic             | Rollback on failure                          | `false`   | ❌        |
+| wait               | Wait until resources are ready               | `false`   | ❌        |
+| dry_run            | Simulate install                             | `false`   | ❌        |
+| install            | Enable install if not already present        | `true`    | ❌        |
+| reuse_values       | Merge with previous values                   | `false`   | ❌        |
+| reset_values       | Reset to chart defaults                      | `false`   | ❌        |
+| cleanup_on_fail    | Delete resources on failure                  | `false`   | ❌        |
+| dependency_update  | Update missing chart deps                    | `true`    | ❌        |
+| post_renderer      | Path to post-renderer binary                 | —         | ❌        |
+| post_renderer_args | Extra arguments for post-renderer            | —         | ❌        |
 
 ## 📝 License
 

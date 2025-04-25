@@ -22,6 +22,10 @@ inputs:
   version:
     required: false
     default: ''
+  create_namespace:
+    required: false
+    default: 'false'
+    description: 'If set to true, will pass --create-namespace to Helm'
   wait:
     required: false
     default: 'false'
@@ -74,3 +78,5 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  entrypoint: 'python'
+  args: [ 'main.py' ]
