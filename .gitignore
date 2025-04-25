@@ -1,0 +1,6 @@
+# Various IDEs
+.project
+.idea/
+*.tmproj
+.vscode/
+helm-deploy.iml
