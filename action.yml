@@ -1,0 +1,72 @@
+# -------------------------
+# 📄 action.yml
+# -------------------------
+name: 'helm-upgrade-pro'
+description: 'Professional Helm upgrade GitHub Action with full CLI support'
+author: 'Your Name'
+
+inputs:
+  release:
+    required: true
+    description: 'Release name'
+  chart:
+    required: true
+    description: 'Chart path, reference, or URL'
+  namespace:
+    required: false
+    default: 'default'
+  version:
+    required: false
+    default: ''
+  wait:
+    required: false
+    default: 'false'
+  atomic:
+    required: false
+    default: 'false'
+  install:
+    required: false
+    default: 'true'
+  dry_run:
+    required: false
+    default: 'false'
+  reuse_values:
+    required: false
+    default: 'false'
+  reset_values:
+    required: false
+    default: 'false'
+  timeout:
+    required: false
+    default: '5m0s'
+  cleanup_on_fail:
+    required: false
+    default: 'false'
+  dependency_update:
+    required: false
+    default: 'true'
+  values:
+    required: false
+    default: ''
+  set:
+    required: false
+    default: ''
+  set_string:
+    required: false
+    default: ''
+  set_file:
+    required: false
+    default: ''
+  post_renderer:
+    required: false
+    default: ''
+  post_renderer_args:
+    required: false
+    default: ''
+  kubeconfig:
+    required: true
+    description: 'Base64 encoded kubeconfig'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

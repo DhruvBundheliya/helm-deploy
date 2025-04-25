@@ -1,0 +1,60 @@
+# -------------------------
+# 📄 .github/workflows/test.yml
+# Updated to spin up a local k3d cluster, generate a dummy Helm chart, and apply it using the action
+name: Test Helm Upgrade
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python and Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip curl bash gnupg
+          pip install -r requirements.txt
+
+      - name: Install k3d
+        run: curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+
+      - name: Create k3d cluster
+        run: k3d cluster create helm-test-cluster --wait
+
+      - name: Export kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          k3d kubeconfig get helm-test-cluster > ~/.kube/config
+
+      - name: Encode kubeconfig
+        id: kubeconfig
+        run: echo "KUBECONFIG_B64=$(base64 -w 0 ~/.kube/config)" >> $GITHUB_ENV
+
+      - name: Install Helm
+        run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Create dummy chart
+        run: helm create charts/dummy
+
+      - name: Run Helm Upgrade Pro Action
+        uses: ./
+        with:
+          release: dummy-release
+          chart: ./charts/dummy
+          namespace: default
+          atomic: true
+          wait: true
+          kubeconfig: ${{ env.KUBECONFIG_B64 }}
+
+      - name: Cleanup
+        run: |
+          k3d cluster delete helm-test-cluster
+          rm -rf charts/dummy
