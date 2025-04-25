@@ -24,7 +24,9 @@ jobs:
         run: k3d cluster create helm-test-cluster --wait
 
       - name: Create Dummy Helm Chart
-        run: helm create charts/dummy
+        run: |
+          mkdir -p charts
+          helm create charts/dummy
 
       - name: Set Inputs as Env Vars
         run: |
