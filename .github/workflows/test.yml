@@ -42,7 +42,9 @@ jobs:
         run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
       - name: Create dummy chart
-        run: helm create charts/dummy
+        run: |
+          mkdir -p charts
+          helm create charts/dummy
 
       - name: Run Helm Upgrade Pro Action
         uses: ./
