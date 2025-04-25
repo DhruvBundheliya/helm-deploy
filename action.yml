@@ -1,9 +1,9 @@
 # -------------------------
 # 📄 action.yml
 # -------------------------
-name: 'helm-upgrade-pro'
-description: 'Professional Helm upgrade GitHub Action with full CLI support'
-author: 'Your Name'
+name: 'helm-upgrade'
+description: 'Helm upgrade GitHub Action with full CLI support'
+author: 'Dhruv Bundheliya'
 
 inputs:
   release:
