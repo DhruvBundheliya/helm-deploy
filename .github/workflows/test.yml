@@ -47,8 +47,15 @@ jobs:
       - name: Run main.py directly (same as inside Docker)
         run: python3 main.py
 
-      - name: Validate Deployment
-        run: kubectl get deploy -n default
+      - name: Check for deployment from Helm
+        run: |
+          DEPLOY=$(kubectl get deploy -n default -o name | grep dummy || true)
+          if [ -z "$DEPLOY" ]; then
+            echo "❌ Deployment not found!"
+            exit 1
+          fi
+          echo "✅ Found deployment: $DEPLOY"
+          kubectl get $DEPLOY -n default
 
       - name: Cleanup
         run: |
