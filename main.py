@@ -1,6 +1,3 @@
-# -------------------------
-# 🐍 main.py
-# -------------------------
 import os
 import subprocess
 import base64
@@ -40,7 +37,11 @@ def main():
 
     args += ["--install", release, chart]
 
-    decode_kubeconfig(os.getenv("INPUT_KUBECONFIG"))
+    kubeconfig = os.getenv("INPUT_KUBECONFIG")
+    if kubeconfig:
+        decode_kubeconfig(kubeconfig)
+    else:
+        print("ℹ️ No kubeconfig input provided — assuming default ~/.kube/config")
 
     # Direct value flags
     direct_flags = {

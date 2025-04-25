@@ -1,4 +1,4 @@
-name: Test Helm Upgrade Pro
+name: Test Helm Upgrade
 
 on:
   push:
