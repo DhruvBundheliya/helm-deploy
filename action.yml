@@ -78,5 +78,3 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  entrypoint: 'python'
-  args: [ 'main.py' ]

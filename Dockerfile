@@ -8,7 +8,7 @@ RUN apt-get update && \
     curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash && \
     apt-get clean
 
-WORKDIR /app
+WORKDIR /github/workspace
 COPY main.py ./
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
