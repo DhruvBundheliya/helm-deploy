@@ -1,7 +1,4 @@
-# -------------------------
-# 📄 .github/workflows/test.yml
-# Updated to spin up a local k3d cluster, generate a dummy Helm chart, and apply it using the action
-name: Test Helm Upgrade
+name: Test Helm Upgrade Pro
 
 on:
   push:
@@ -14,47 +11,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Repo
         uses: actions/checkout@v4
-
-      - name: Set up Python and Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip curl bash gnupg
-          pip install -r requirements.txt
-
-      - name: Install k3d
-        run: curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
-
-      - name: Create k3d cluster
-        run: k3d cluster create helm-test-cluster --wait
-
-      - name: Export kubeconfig
-        run: |
-          mkdir -p ~/.kube
-          k3d kubeconfig get helm-test-cluster > ~/.kube/config
-
-      - name: Encode kubeconfig
-        id: kubeconfig
-        run: echo "KUBECONFIG_B64=$(base64 -w 0 ~/.kube/config)" >> $GITHUB_ENV
 
       - name: Install Helm
         run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-      - name: Create dummy chart
-        run: |
-          mkdir -p charts
-          helm create charts/dummy
+      - name: Install k3d
+        run: curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 
-      - name: Run Helm Upgrade Pro Action
-        uses: ./
-        with:
-          release: dummy-release
-          chart: ./charts/dummy
-          namespace: default
-          atomic: true
-          wait: true
-          kubeconfig: ${{ env.KUBECONFIG_B64 }}
+      - name: Create k3d Cluster
+        run: k3d cluster create helm-test-cluster --wait
+
+      - name: Create Dummy Helm Chart
+        run: helm create charts/dummy
+
+      - name: Set Inputs as Env Vars
+        run: |
+          echo "INPUT_RELEASE=dummy-release" >> $GITHUB_ENV
+          echo "INPUT_CHART=charts/dummy" >> $GITHUB_ENV
+          echo "INPUT_NAMESPACE=default" >> $GITHUB_ENV
+          echo "INPUT_ATOMIC=true" >> $GITHUB_ENV
+          echo "INPUT_WAIT=true" >> $GITHUB_ENV
+          echo "INPUT_INSTALL=true" >> $GITHUB_ENV
+          echo "INPUT_DEPENDENCY_UPDATE=true" >> $GITHUB_ENV
+          echo "INPUT_TIMEOUT=5m0s" >> $GITHUB_ENV
+
+      - name: Install Python & Dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run main.py directly (same as inside Docker)
+        run: python3 main.py
+
+      - name: Validate Deployment
+        run: kubectl get deploy dummy -n default
 
       - name: Cleanup
         run: |
