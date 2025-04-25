@@ -13,7 +13,7 @@ A GitHub Action to deploy Helm charts using Python. It wraps `helm upgrade --ins
 
 ```yaml
 - name: Deploy using Helm Upgrade Pro
-  uses: your-org/helm-upgrade-pro@v1
+  uses: DhruvBundheliya/helm-deploy@v1
   with:
     release: my-app
     chart: ./charts/my-app
@@ -32,7 +32,7 @@ A GitHub Action to deploy Helm charts using Python. It wraps `helm upgrade --ins
 
 **Minimal Deployment**
 ```yaml
-- uses: your-org/helm-upgrade-pro@v1
+- uses: DhruvBundheliya/helm-deploy@v1
   with:
     release: my-app
     chart: ./charts/app
@@ -41,7 +41,7 @@ A GitHub Action to deploy Helm charts using Python. It wraps `helm upgrade --ins
 
 **Advanced Overrides**
 ```yaml
-- uses: your-org/helm-upgrade-pro@v1
+- uses: DhruvBundheliya/helm-deploy@v1
   with:
     release: web
     chart: ./charts/web
