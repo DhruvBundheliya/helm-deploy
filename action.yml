@@ -4,8 +4,10 @@
 name: 'helm-upgrade'
 description: 'Helm upgrade GitHub Action with full CLI support'
 author: 'Dhruv Bundheliya'
-icon: anchor
-color: gray-dark
+
+branding:
+  icon: anchor
+  color: gray-dark
 
 inputs:
   release:
