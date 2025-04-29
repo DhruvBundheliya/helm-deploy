@@ -77,4 +77,4 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://dhruvbundheliya/helm-upgrade:0e90eebc4721bc87cb3a172ed3d515d91c7ab20f'
+  image: 'docker://dhruvbundheliya/helm-upgrade:a619d80dbe459b51488c0957fcdf3688977be28a'
