@@ -68,7 +68,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and Push Docker image to Dockerhub
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/helm-upgrade:${{ github.sha }} .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/helm-upgrade:${{ github.sha }}
+          
