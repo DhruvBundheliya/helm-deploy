@@ -76,5 +76,17 @@ inputs:
     description: 'Base64 encoded kubeconfig'
 
 runs:
-  using: 'docker'
-  image: 'docker://dhruvbundheliya/helm-upgrade:8ffc885e0b71ff829a3acf44158e166cab32e1c5'
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Python dependencies
+      run: pip install -r ${{ github.action_path }}/requirements.txt
+      shell: bash
+
+    - name: Run main.py
+      run: python ${{ github.action_path }}/main.py
+      shell: bash
