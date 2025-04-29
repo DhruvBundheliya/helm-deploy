@@ -9,8 +9,8 @@ RUN apt-get update && \
     apt-get clean
 
 WORKDIR /app
-COPY main.py /app/main.py
-COPY requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
+COPY main.py /main.py
+COPY requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt
 
-ENTRYPOINT ["python", "/app/main.py"]
+ENTRYPOINT ["python", "/main.py"]
