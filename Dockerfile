@@ -13,4 +13,6 @@ COPY main.py /github/workspace/main.py
 COPY requirements.txt /github/workspace/requirements.txt
 RUN pip install -r /github/workspace/requirements.txt
 
-ENTRYPOINT ["pwd && ls -al && ls -al /github/workspace"]
+ENTRYPOINT ["python"]
+
+CMD ["/github/workspace/main.py"]
