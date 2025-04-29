@@ -87,6 +87,28 @@ runs:
       run: pip install -r ${{ github.action_path }}/requirements.txt
       shell: bash
 
-    - name: Run main.py
+    - name: Run Helm Upgrade Script
       run: python ${{ github.action_path }}/main.py
       shell: bash
+      env:
+        INPUT_RELEASE: ${{ inputs.release }}
+        INPUT_CHART: ${{ inputs.chart }}
+        INPUT_NAMESPACE: ${{ inputs.namespace }}
+        INPUT_VERSION: ${{ inputs.version }}
+        INPUT_CREATE_NAMESPACE: ${{ inputs.create_namespace }}
+        INPUT_WAIT: ${{ inputs.wait }}
+        INPUT_ATOMIC: ${{ inputs.atomic }}
+        INPUT_INSTALL: ${{ inputs.install }}
+        INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        INPUT_REUSE_VALUES: ${{ inputs.reuse_values }}
+        INPUT_RESET_VALUES: ${{ inputs.reset_values }}
+        INPUT_TIMEOUT: ${{ inputs.timeout }}
+        INPUT_CLEANUP_ON_FAIL: ${{ inputs.cleanup_on_fail }}
+        INPUT_DEPENDENCY_UPDATE: ${{ inputs.dependency_update }}
+        INPUT_VALUES: ${{ inputs.values }}
+        INPUT_SET: ${{ inputs.set }}
+        INPUT_SET_STRING: ${{ inputs.set_string }}
+        INPUT_SET_FILE: ${{ inputs.set_file }}
+        INPUT_POST_RENDERER: ${{ inputs.post_renderer }}
+        INPUT_POST_RENDERER_ARGS: ${{ inputs.post_renderer_args }}
+        INPUT_KUBECONFIG: ${{ inputs.kubeconfig }}
